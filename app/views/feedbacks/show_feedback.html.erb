@@ -1,0 +1,21 @@
+
+
+<div class="col-xs-8 col-xs-offset-2 box-shadow1">
+<% if @feedback != nil %>
+	<div class="panel panel-warning">
+		<div class="panel-heading">
+			<h4><strong><%= @feedback.title.html_safe %></strong></h4>
+		</div>
+		<div class="panel-body">
+			<p><%= simple_format(@feedback.description) %></p>
+		</div>
+		<div class="panel-footer">
+			<p>Posted by :<b><%= @feedback.user_name %></b></p>
+			<p>Posted on :<b><%= @feedback.created_at.strftime("%d/%m/%Y | %l:%M %P") %></b></p>
+		<% if user_signed_in? && @feedback.user_id == current_user.id %>
+			<%= link_to "Delete", feedback_path(@feedback),method: :delete,class: "btn btn-danger btn-sm btn-responsive" %>
+		<% end %>
+		</div>
+	</div>
+<% end %>
+</div>

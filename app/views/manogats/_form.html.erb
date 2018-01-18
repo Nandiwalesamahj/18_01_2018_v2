@@ -1,0 +1,12 @@
+<%= tinymce %>
+<%= form_for @manogat do |f| %>
+<h3>नाव</h3>
+	<%= f.text_area :user_name,label: "नाव",class: "tinymce" %>
+<h3>वर्णन</h3>
+	<%= f.text_area :description,label: "वर्णन" ,class: "tinymce" %>
+	<p>फोटो</p>
+	<%= f.file_field :photo,label: "फोटो" %>
+	<p>Attachment</p>
+	<%= f.file_field :attachment,label: "attachment" %>
+	<%= f.submit "जतन करा" %>
+<% end %>

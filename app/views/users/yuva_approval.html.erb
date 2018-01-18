@@ -1,0 +1,59 @@
+
+<h2 align="center"> Yuva Sanghatna Approval </h2>
+<hr>
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="links-box">
+			<p class="link-options">
+			<%= link_to "Rajya Sanghatna Approval", rajya_approval_path %> &emsp;
+			<%= link_to "Yuva Sanghatna Approval", yuva_approval_path , class: "btn btn-sm btn-danger btn-responsive" %> &emsp;
+			<%= link_to "Zilla Sanghatna Approval", zilla_approval_path %> &emsp;
+			<%= link_to "VadhuVar Approval", vadhuvar_approval_path %> &emsp;
+			<%= link_to "Tanta_mukti Samiti Approval", tanta_mukti_approval_path %> &emsp;
+	 		</p>
+				</div>
+				<br/>
+	<div class="col-xs-8 col-xs-offset-2">
+	<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+			<% if @users.size > 0 %>	
+			<div class="table-responsive">
+     		<table class="table1">
+     			<col width="200">
+     			<col width="400">
+	     		<thead>
+				<tr>
+					<th>Name</th>
+					<th>Approve</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% for user in @users %>
+						<tr>
+							<%= simple_form_for user do |f| %>
+							<% if user != nil && user.first_name != nil && user.middle_name != nil && user.last_name != nil %>
+							<td><%= user.full_name %></td>
+							<td><%= f.input :yuva_approval, collection: [:Yes, :No], as: :radio_buttons %>
+							<%= f.submit "Approve" %></td>
+							
+							<% elsif user != nil && user.first_name != nil && user.last_name != nil %>
+							 <td><%= user.first_name + " " + user.last_name %></td>
+                                                        <td><%= f.input :yuva_approval, collection: [:Yes, :No], as: :radio_buttons %>
+                                                        <%= f.submit "Approve" %></td>							
+							<% end %>
+							<% end %>
+						</tr>
+				<% end %>
+				</tbody>
+			</table>
+			</div>	
+			<% else %>
+					<h3> No new users registered yet </h3>
+			<% end %>
+	<% else %>
+		<p>Access Denied because you are not an admin</p>
+	<% end %>
+	</div>
+	</div>
+</div>
+

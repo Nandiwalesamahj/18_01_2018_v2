@@ -1,0 +1,92 @@
+<%= tinymce %>
+<h2 align="center"><strong>भविष्‍यातील ध्‍येय धोरणे</strong></h2>	
+	
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+		<% if @summary_exist != nil %>
+	<%= form_for @summary_exist do |f| %>
+		<%= f.text_area :future_vision_summary, label: "भविष्‍यातील ध्‍येय धोरणे सारांश",class: "tinymce" %>
+		<%= f.submit "Update" %>
+	<% end %>
+<% else %>
+	<%= form_for @summary do |f| %>
+			<%= f.text_area :future_vision_summary, label: "भविष्‍यातील ध्‍येय धोरणे सारांश",class: "tinymce" %>
+			<%= f.submit "Save" %>
+	<% end %>
+<% end %>
+	
+	<% else %>
+	<% if @summary_exist != nil %>
+	<h4 class="box-summary"><%= simple_format(@summary_exist.future_vision_summary) %></h4>
+	<% end %>
+	<% end %>
+		<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+			<%= link_to "नवीन ध्येय",new_vision_path,class: "btn btn-primary btn-sm btn-responsive" %>
+		<% end %>
+		<hr>
+		<div class="row">
+			<div class="col-xs-8">
+			<% count = 1 %>
+            
+			<% if  @visions!= nil &&  @visions.size > 0 %>
+				<div class="table-responsive">
+	     		<table class="table2">
+	     			<col width="50">
+					<col width="700">
+					<thead>
+                        <tr>
+                            <th>नंबर</th>
+                            <th> ध्‍येय</th>
+                        </tr>
+                    </thead>
+					
+					<% for member in @visions %>
+					<tbody>
+						<tr>
+						<td>
+							<p align="center"><b><%= count %></b></p>
+						</td>
+						<td>
+							<p><% if member.description? %>
+								<%= simple_format(member.description) %>
+								<% end %>
+							</p>
+							
+							<p><% if user_signed_in? && current_user.user_type == "Super_admin" %>
+								<hr>
+									<%= link_to "एडिट ध्येय",edit_vision_path(member),class: "btn btn-primary btn-sm btn-responsive" %>
+									<%= link_to "Delete ध्येय",vision_path(member), method: :delete,class: "btn btn-danger btn-sm btn-responsive" %>
+								<% end %>
+							</p>
+						</td>
+						</tr>
+					</tbody>
+					<% count = count + 1 %>
+					<% end %>
+				</table>
+
+				</div>
+			<% else %>
+				<h3> डेटा जोडण्यासाठी प्रशासकाशी संपर्क साधा </h3>
+			<% end %>
+			</div>
+			<div class="col-xs-4">
+              <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3>जाहिरात</h3>
+              </div>
+             	<div class="panel-body scrollable">
+			<% if @ads.size > 0 %>
+				<% for ad in @ads %>
+					<div class="advertisement-box">
+						<p class="underline-text"><strong><%= ad.title %></strong><p>
+						<% if ad.photo? %>
+							<p> <%= image_tag((ad.photo.url), class: "karmchari-img image-responsive") %></p>
+						<% end %>
+						<p><%= ad.description %></p>
+					</div>
+			    <% end %>
+			<% end %>
+		</div>
+              </div>  
+          </div>
+		</div>

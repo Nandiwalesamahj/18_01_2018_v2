@@ -1,0 +1,13 @@
+<div class="row">
+	<div class="col-xs-8 col-xs-offset-2">
+<%= tinymce %>
+<input class="pull-right" type="button" value="Refresh Page" onClick="window.location.href=window.location.href">
+<%= form_for @helper do |f| %>
+	<%= f.text_field :helper_name, label: "नाव"  %>
+	<%= f.text_field :helper_post, label: "पदनाम" %>
+	<%= f.text_area :helper_address, label: "पत्ता",class: "tinymce" %>
+	<%= f.text_field :helper_phone, label: "मोबाइल नंबर" %>
+	<%= f.text_field :helper_email,label: "ईमेल" %>
+<% end %>
+</div>
+</div>

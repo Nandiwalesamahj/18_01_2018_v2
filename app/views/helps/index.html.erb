@@ -1,0 +1,89 @@
+<%= tinymce %>
+	<h2 align="center"><strong>मदत कार्य</strong></h2>	
+	<% if user_signed_in? &&  current_user.user_type == "Super_admin" %>
+		<% if @summary_exist != nil %>
+			<%= form_for @summary_exist do |f| %>
+			<%= f.text_area :help_summary, label: "मदत कार्य सारांश" , class: 'tinymce' %>
+			<%= f.submit "Update" %>
+			<% end %>
+		<% else %>
+			<%= form_for @summary do |f| %>
+			<%= f.text_area :help_summary, label: "मदत कार्य सारांश" , class: 'tinymce' %>
+			<%= f.submit "Save" %>
+			<% end %>
+		<% end %>
+	<% else %>
+		<% if @summary_exist != nil %>
+			<h4 class="margin-bottom2">(<%= simple_format(@summary_exist.help_summary) %>)</h4>
+		<% end %>
+	<% end %>
+
+	<hr>
+	<div class="row">
+	<div class="col-xs-7">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h3>मदत विनंती</h3>
+				<% if user_signed_in? %>
+					<%= link_to "नवीन मदत विनंती", new_help_path , class: "btn btn-primary btn-sm btn-responsive" %>
+				<% end %>
+			</div>
+			<div class="panel-footer">
+				<% if @helpies.size > 0 %>
+					<% count = 1%>
+					<% for helpie in @helpies %>
+						<div class="table-responsive">
+						<table class="table2">
+							<col width="100">
+							<col width="600">
+							<tbody>
+								<tr><td><b><%= count %>.नाव</b></td><td><%= helpie.helpie_name %></td></tr>
+								<tr><td><b>मोबाइल नंबर</b></td><td><%= helpie.helpie_phone %></td></tr>
+								<tr><td><b>पत्ता</b></td><td><%= helpie.helpie_address.html_safe %></td></tr>
+								<tr><td><b>समस्या विषय</b></td><td><%= helpie.help_title.html_safe %></td></tr>
+								<tr><td><b>समस्या बाबत सविस्तर माहिती</b></td><td><%= helpie.help_description.html_safe %></td></tr>
+								<tr><td><b>अपेक्षा</b></td><td><%= helpie.help_expecation.html_safe %></td></tr>
+							</tbody>
+						</table>
+						</div>
+						<br/>
+						<% count = count + 1 %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>			
+	</div>
+	<div class="col-xs-5">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3> मदतीकरता संपर्क</h3>
+				<% if user_signed_in? && current_user.user_type == "Super_admin" %>
+					<%= link_to " मदतकरता ऍड करा ", new_helper_path , class: "btn btn-primary btn-sm btn-responsive" %>
+				<% end %>
+			</div>
+			<div class="panel-body">
+				<% if @helpers.size > 0 %>
+				<% count = 1%>
+					<% for a_helper in @helpers %>
+						<div class="table-responsive">
+						<table class="table2">
+							<col width="100">
+							<col width="600">
+							<tbody>
+								<tr><td><b><%= count %>.नाव</b></td><td><%= a_helper.helper_name %></td></tr>
+								<tr><td><b>पदनाम</b></td><td><%= a_helper.helper_post %></td></tr>
+								<tr><td><b>मोबाइल नंबर</b></td><td><%= a_helper.helper_phone %></td></tr>
+								<tr><td><b>ईमेल</b></td><td><%= a_helper.helper_email %></td></tr>
+								<tr><td><b>पत्ता</b></td><td><%= a_helper.helper_address.html_safe%></td></tr>
+							</tbody>
+						</table>
+						</div>
+						<%= link_to "Delete", help_path(a_helper),method: :delete,class: "btn btn-danger btn-sm btn-responsive" %>
+						<br/>
+					<% count = count + 1 %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

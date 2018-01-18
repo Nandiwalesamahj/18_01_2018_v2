@@ -1,0 +1,15 @@
+<%= tinymce %>
+<%= form_for @samajikplace do |f| %>
+	<h3>शीर्षक</h3>
+	<%= f.text_area :title,label: "शीर्षक" , class: 'tinymce'%>
+	<h3>वर्णन</h3>
+	<%= f.text_area :description,label: "वर्णन", class: 'tinymce'  %>
+	<h3>जागा</h3>
+	<%= f.text_area :place,label: "जागा", class: 'tinymce' %>
+	<h3>पत्ता</h3>
+	<%= f.text_area :address,label: "पत्ता" , class: 'tinymce' %>
+	<p>Photo</p>
+	<h3>Add File</h3>
+	<%= f.file_field :photo,label: "add file" %>
+	<%= f.submit "सबमिट करा" %>
+<% end %>

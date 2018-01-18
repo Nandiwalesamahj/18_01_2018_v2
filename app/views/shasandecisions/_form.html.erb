@@ -1,0 +1,12 @@
+<%= tinymce %>
+<%= form_for @shasandecision do |f| %>
+<h3>शीर्षक</h3>
+	<%= f.text_area :title,label: "शीर्षक" ,class: "tinymce"%>
+<h3>वर्णन</h3>
+	<%= f.text_area :description,label: "वर्णन"  ,class: "tinymce"%>
+	<br>
+	<p>Attachment</p>
+	<%= f.file_field :attachment %>
+<br>
+	<%= f.submit "सबमिट करा",class: "bt. btn-default" %>
+<% end %>

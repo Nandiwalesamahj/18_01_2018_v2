@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mr" xml:lang="mr">
+	
+  <head>
+  <title >नंदीवाले समाज</title>
+  <%= favicon_link_tag 'icon.jpg' %>
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+   	<meta name="keywords" content="nandiwale,Nandiwale,Nandiwalesamaj,nandiwalesamaj,nadniwalesamaj,Nadniwalesamaj, nandi samaj,Nandi Samaj,nandi Samaj,Nandi Samaj,Nandiwalesamaj.com,nandiwalesamaj.com"> 
+	<%= csrf_meta_tags %>
+	<meta name="google-site-verification" content="5bbU71DduLyR0WN36NHaHn32GDxX_tle2ZHGR5Q1GbQ" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  
+  <body class="bg">
+    <%= render 'layouts/navbar' %>
+  
+      <div class="col-xs-2">
+        <%= render 'layouts/sidebar' %>
+      </div>
+    
+
+  <script type="text/javascript">
+   tinymce.init({
+  selector: 'textarea',
+  theme: 'modern',
+  force_br_newlines : false,
+  force_p_newlines : false,
+  convert_fonts_to_spans : false,
+  branding: false,
+  plugins: 'table colorpicker emoticons textcolor pramukhime ',
+  toolbar1: 'bold italic strikethrough forecolor backcolor | pramukhime pramukhimesettings pramukhimeresetsettings pramukhimetogglelanguage pramukhimehelp | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | emoticons',
+  image_advtab: true,
+  templates: [
+    { title: 'Test template 1', content: 'Test 1' },
+    { title: 'Test template 2', content: 'Test 2' }
+  ],
+  content_css: [
+    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    '//www.tinymce.com/css/codepen.min.css'
+  ]
+ });
+
+  </script>
+  <div class="col-xs-10">
+      <%= yield %>
+  </div>
+  </body>
+
+  
+</html>

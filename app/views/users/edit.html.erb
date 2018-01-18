@@ -1,0 +1,56 @@
+<h2 align="center"><strong>प्रोफाईल संपादित करा</strong></h2>
+<hr>
+<div class="row">
+	<div class="col-xs-8 col-xs-offset-2">
+	<div class="box-shadow1">
+		<%= simple_form_for([@user]) do |f| %>
+			<% if @user.id == current_user.id %>
+				<% if @user.avatar? %>
+					<p align="center"><%= image_tag((@user.avatar.url),class: "img4 image-responsive") %></p>
+						<label><%= f.check_box :remove_avatar %>
+							<%= f.submit :Remove %>
+						</label>
+				<% else %>
+					<% if @user.gender == "पुरूष" %>
+						<p align="center"><%= image_tag(('male-no-avatar.png'),class: "img4 image-responsive") %></p>
+					<% elsif @user.gender == "स्त्री" %>
+						<p align="center"><%= image_tag(('female-no-avatar.png'),class: "img4 image-responsive") %></p>
+					<% end %>
+					<p><b>प्रोफाइल फोटो निवडा</b></p>
+					<p><%= f.file_field :avatar, label: "Avatar", title: "फोटो निवडा" , class: "file-picker" %></p>
+					<p><%= f.button :submit, "सबमिट करा" , class: "btn btn-success btn-sm btn-responsive" %></p>
+				<% end %>
+			<% end %>
+		<% end %>
+		<hr>
+		<% if user_signed_in? %>
+			<%= simple_form_for(@user) do |f| %>
+				<% if @user.id == current_user.id %>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered">
+							<tbody>
+								<tr><td><b>पहिले नाव</b></td><td><%= f.input :first_name, label: false %></td></tr>
+								<tr><td><b>मधले नाव</b></td><td><%= f.input :middle_name, label: false %></td></tr>
+								<tr><td><b>आडनाव</b></td><td><%= f.input :last_name, label: false %></td></tr>
+								<tr><td><b>लिंग(पुरूष/स्त्री)</b></td><td><%= f.input :gender, collection: [:स्त्री, :पुरूष],label: false %></td></tr>
+								<tr><td><b>जन्म तारीख</b></td><td><%= f.input :birthdate, label: false , :start_year => Date.current.year, :end_year => 1940 %></td></tr>
+								<tr><td><b>पदनाम</b></td><td><%= f.input :post, label: false %></td></tr>
+								<tr><td><b>कालावधी</b></td><td><%= f.input :tenure, label: false %></td></tr>
+								<tr><td><b>फोन नंबर</b></td><td><%= f.input :phone, label: false %></td></tr>
+								<tr><td><b>पत्ता</b></td><td><%= f.input :address, label: false %></td></tr>
+								<tr><td><b>स्वतः विषयी</b></td><td><%= f.input :bio, label: false %></td></tr>
+								<tr><td><b>कार्य जिल्हा</b></td><td><%= f.input :work_at_district, label: false , as: :select,collection: [:मुंबई_शहर,:मुंबई_उपनगर,:ठाणे,:पालचर,:राजगड,:रत्नागिरी,:सिंधुदुर्ग,:नाशिक,:धुळे,:नंदुरबार,:जळगाव,:अहमदनगर,:पुणे,:सातारा,:सांगली,:सोलापूर,:कोल्हापूर,:औरंगाबाद,:जालना,:परभणी,:हिंगोली,:बीड,:नांदेड,:उस्मानाबाद,:लातूर,:अमरावती,:बुलढाणा,:अकोला,:वाशिम,:यवतमाळ,:नागपूर,:वर्धा,:भंडारा,:गोंदिया,:चंद्रपूर,:गडचिरोली], input_html: { class: "chosen-select" }  %></td></tr>								
+							</tbody>
+						</table>
+					</div>
+					<hr>
+				<% end %>
+				<% if current_user.user_type == "Super_admin" %>
+					<%= f.input :user_type, label: "User Type",collection: [:Admin,:Sub_admin] %>
+				<% end %>
+				<%= f.button :submit, "सबमिट करा" , class: "btn btn-success btn-sm btn-responsive" %>
+			<% end %>
+		<% end %>
+	</div>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<%= tinymce %>
+<div class="row">
+	<div class="col-xs-8 col-xs-offset-2">
+<%= form_for @helper do |f| %>
+	<h4>नाव</h4>
+	<%= f.text_field :helper_name, label: "नाव"  %>
+	<h4>पदनाम</h4>
+	<%= f.text_field :helper_post, label: "पदनाम" %>
+	<h4>पत्ता</h4>
+	<%= f.text_area :helper_address, label: "पत्ता" , class: 'tinymce'%>
+	<h4>मोबाइल नंबर</h4>
+	<%= f.text_field :helper_phone, label: "मोबाइल नंबर" %>
+	<h4>ईमेल</h4>
+	<%= f.text_field :helper_email,label: "ईमेल" %>
+	<%= f.submit "सबमिट करा" %>
+<% end %>
+</div>
+</div>

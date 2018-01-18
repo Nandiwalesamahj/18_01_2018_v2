@@ -1,0 +1,13 @@
+
+<%= form_for @sandarbhsuchi do |f| %>
+    <h3>Title</h3>
+      <%= f.text_area :title ,  class: 'tinymce'%>
+    <h3>Description</h3>
+      <%= f.text_area :description ,  class: 'tinymce'%>
+    <h3>Link</h3>
+      <%= f.text_field :link,size: 100 %>
+      <p>Attachment</p>
+      <%= f.file_field :attachment %>
+      <%= f.submit %>
+<% end %>
+<%= tinymce %>
